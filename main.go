@@ -1,6 +1,13 @@
 package main
 
-import "time"
+import (
+	r "firstpayment/router"
+	"fmt"
+	"net/http"
+	"time"
+
+	log "github.com/sirupsen/logrus"
+)
 
 // card
 // user
@@ -21,5 +28,7 @@ type card struct {
 }
 
 func main() {
-
+	fmt.Print("Fist App")
+	router := r.RouterConfig()
+	log.Fatal(http.ListenAndServe(":8080", router))
 }
