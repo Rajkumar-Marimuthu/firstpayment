@@ -30,5 +30,6 @@ type card struct {
 func main() {
 	fmt.Print("Fist App")
 	router := r.RouterConfig()
+
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
