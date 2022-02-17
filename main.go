@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"net/http"
 	"time"
-
-	log "github.com/sirupsen/logrus"
 )
 
 // card
@@ -29,7 +27,9 @@ type card struct {
 
 func main() {
 	fmt.Print("Fist App")
-	router := r.RouterConfig()
-
-	log.Fatal(http.ListenAndServe(":8080", router))
+	router := r.ServerConfig()
+	err := http.ListenAndServe(":8080", router)
+	if err != nil {
+		panic(err)
+	}
 }

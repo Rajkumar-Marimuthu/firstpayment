@@ -2,12 +2,11 @@ package router
 
 import (
 	controller "firstpayment/controller"
-	"net/http"
 
 	"github.com/gorilla/mux"
 )
 
-func serverConfig() {
+func ServerConfig() *mux.Router {
 	router := mux.NewRouter()
 	controller.CardDetailsList = append(controller.CardDetailsList, controller.CardDetails{ID: "101", Name: "Anuradha", CardType: "VISA", Cvv: "444"})
 	controller.CardDetailsList = append(controller.CardDetailsList, controller.CardDetails{ID: "102", Name: "Ashok", CardType: "MasterCard", Cvv: "555"})
@@ -16,9 +15,8 @@ func serverConfig() {
 	router.HandleFunc("/carddetails/{id}", controller.GetCardDetails).Methods("GET")
 	router.HandleFunc("/carddetails", controller.PostCardDetails).Methods("POST")
 	router.HandleFunc("/carddetails/{id}", controller.DeleteCardDetails).Methods("DELETE")
+	router.HandleFunc("/health", controller.HealthCheck).Methods("GET")
 
-	err := http.ListenAndServe(":8080", router)
-	if err != nil {
-		panic(err)
-	}
+	return router
+
 }
