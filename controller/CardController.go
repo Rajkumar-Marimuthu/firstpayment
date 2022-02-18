@@ -39,12 +39,17 @@ func GetAllCardDetails(res http.ResponseWriter, req *http.Request) {
 	res.Write(jsonBytes)
 }
 
+// give array of cards to add
+// verify card details
+// Enter unique card number
 func PostCardDetails(res http.ResponseWriter, req *http.Request) {
 	//params := mux.Vars(req)
-	var addCard CardDetails
+	var addCard []CardDetails
 	err := json.NewDecoder(req.Body).Decode(&addCard)
 	//addCard.ID = params["id"]
-	CardDetailsList = append(CardDetailsList, addCard)
+	for _, card := range addCard {
+		CardDetailsList = append(CardDetailsList, card)
+	}
 	jsonBytes, err := json.Marshal(CardDetailsList)
 	if err != nil {
 		res.WriteHeader(http.StatusBadRequest)
