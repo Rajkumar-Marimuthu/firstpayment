@@ -26,7 +26,7 @@ type card struct {
 }
 
 func main() {
-	fmt.Print("Fist App")
+	fmt.Println("First App")
 	router := r.ServerConfig()
 	err := http.ListenAndServe(":8080", router)
 	if err != nil {

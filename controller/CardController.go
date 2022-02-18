@@ -8,7 +8,7 @@ import (
 )
 
 type CardDetails struct {
-	ID       string `jso:"id"`
+	ID       string `json:"id"`
 	Name     string `json:"name"`
 	CardType string `json:"cardType"`
 	Cvv      string `json:cvv`
