@@ -58,6 +58,23 @@ func PostCardDetails(res http.ResponseWriter, req *http.Request) {
 	res.Write(jsonBytes)
 }
 
+func VerifyCardDetails(res http.ResponseWriter, req *http.Request) {
+	var enteredCard CardDetails
+	err := json.NewDecoder(req.Body).Decode(&enteredCard)
+	if err != nil {
+		res.WriteHeader(http.StatusBadRequest)
+	}
+	for _, card := range CardDetailsList {
+		if card.ID == enteredCard.ID && card.Name == enteredCard.Name && card.Cvv == enteredCard.Cvv && card.CardType == enteredCard.CardType {
+			res.WriteHeader(http.StatusOK)
+			res.Write([]byte("Card verified successfully!!!"))
+			return
+		}
+	}
+	res.WriteHeader(http.StatusBadRequest)
+	res.Write([]byte("Card details doesn't match with any record!!!"))
+}
+
 func DeleteCardDetails(res http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
 	for index, Card := range CardDetailsList {
